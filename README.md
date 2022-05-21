@@ -22,9 +22,6 @@ In this python project, I have made an attendance system which takes attendance 
 ## Main Screen 
 ![Screenshot (250)](https://user-images.githubusercontent.com/81810889/168971214-200933fe-1835-4fd1-8bf3-f60aef6ff667.png)
 
-## Encoding Faces
-![Screenshot (251)](https://user-images.githubusercontent.com/81810889/168971328-3c71327e-1023-41b1-8680-79c24dddefa7.png)
-
 ## Security for new registrations
 ![Screenshot (253)](https://user-images.githubusercontent.com/81810889/168971563-a7527b4d-b4c4-4f66-9499-b3b2bc0ea3e2.png)
 
