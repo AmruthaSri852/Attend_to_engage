@@ -26,7 +26,7 @@ def tick():
     clock.config(text=time_string)
     clock.after(300,tick)
 
-########################################## Contact Us ##########################################
+########################################## Contact Us ########################################## 
 
 def contact():
     mess._show(title='Contact us', message="Get in Touch : amruthasriamaravati852@gmail.com ")
