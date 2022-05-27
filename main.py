@@ -1,9 +1,10 @@
-############################################# IMPORTING ################################################
+########################################## Attendfolio #import#########################################
+
 import tkinter as tk
-from tkinter import ttk
+from tkinter import Tk, ttk
 from tkinter import messagebox as mess
 import tkinter.simpledialog as tsd
-import cv2,os
+import cv2, os
 import csv
 import numpy as np
 from PIL import Image
@@ -11,36 +12,36 @@ import pandas as pd
 import datetime
 import time
 
-############################################# FUNCTIONS ################################################
+########################################## FUNCTIONS ##########################################
 
 def assure_path_exists(path):
     dir = os.path.dirname(path)
     if not os.path.exists(dir):
         os.makedirs(dir)
 
-##################################################################################
+########################################## Time ##########################################
 
 def tick():
-    time_string = time.strftime('%H:%M:%S')
+    time_string = time.strftime('Time: %H:%M:%S')
     clock.config(text=time_string)
-    clock.after(200,tick)
+    clock.after(300,tick)
 
-###################################################################################
+########################################## Contact Us ##########################################
 
 def contact():
-    mess._show(title='Contact us', message="Please contact us on : 'amruthasriamaravati852@gmail.com' ")
+    mess._show(title='Contact us', message="Get in Touch : amruthasriamaravati852@gmail.com ")
 
-###################################################################################
+########################################## Wqrning ##########################################
 
 def check_haarcascadefile():
-    exists = os.path.isfile("haarcascade_frontalface_default.xml")
+    exists= os.path.isfile("haarcascade_frontalface_default.xml")
     if exists:
         pass
     else:
-        mess._show(title='Some file missing', message='Please contact us for help')
+        mess._show(title='Some files are missing', message='Please contact us for help')
         window.destroy()
 
-###################################################################################
+########################################## Save Password ##########################################
 
 def save_pass():
     assure_path_exists("TrainingImageLabel/")
@@ -56,7 +57,7 @@ def save_pass():
         else:
             tf = open("TrainingImageLabel\psd.txt", "w")
             tf.write(new_pas)
-            mess._show(title='Password Registered', message='New password was registered successfully!!')
+            mess._show(title='Password Registered', message='New password registered successfully!!')
             return
     op = (old.get())
     newp= (new.get())
@@ -74,7 +75,7 @@ def save_pass():
     mess._show(title='Password Changed', message='Password changed successfully!!')
     master.destroy()
 
-###################################################################################
+########################################## Change Password ##########################################
 
 def change_pass():
     global master
@@ -83,28 +84,29 @@ def change_pass():
     master.resizable(False,False)
     master.title("Change Password")
     master.configure(background="white")
-    lbl4 = tk.Label(master,text='    Enter Old Password',bg='white',font=('comic', 12, ' bold '))
+    lbl4 = tk.Label(master,text='Current Password',bg='white',font=('arial', 10, ' bold '))
     lbl4.place(x=10,y=10)
     global old
-    old=tk.Entry(master,width=25 ,fg="black",relief='solid',font=('comic', 12, ' bold '),show='*')
+    old=tk.Entry(master,width=25 ,fg="black",relief='solid',font=('arial', 11, ' normal '),show='*')
     old.place(x=180,y=10)
-    lbl5 = tk.Label(master, text='   Enter New Password', bg='white', font=('comic', 12, ' bold '))
+    lbl5 = tk.Label(master, text='New Password', bg='white', font=('arial', 10, ' bold '))
     lbl5.place(x=10, y=45)
     global new
-    new = tk.Entry(master, width=25, fg="black",relief='solid', font=('comic', 12, ' bold '),show='*')
+    new = tk.Entry(master, width=25, fg="black",relief='solid', font=('arial', 11, ' normal '),show='*')
     new.place(x=180, y=45)
-    lbl6 = tk.Label(master, text='Confirm New Password', bg='white', font=('comic', 12, ' bold '))
-    lbl6.place(x=10, y=80)
+    lbl6 = tk.Label(master, text='Confirm New Password', bg='white', font=('arial', 10, ' bold '))
+    lbl6.place(x=10, y=80)  #alignment
     global nnew
-    nnew = tk.Entry(master, width=25, fg="black", relief='solid',font=('comic', 12, ' bold '),show='*')
+    nnew = tk.Entry(master, width=25, fg="black", relief='solid',font=('arial', 11, ' normal '),show='*')
     nnew.place(x=180, y=80)
-    cancel=tk.Button(master,text="Cancel", command=master.destroy ,fg="black"  ,bg="red" ,height=1,width=25 , activebackground = "white" ,font=('comic', 10, ' bold '))
-    cancel.place(x=200, y=120)
-    save1 = tk.Button(master, text="Save", command=save_pass, fg="black", bg="#00fcca", height = 1,width=25, activebackground="white", font=('comic', 10, ' bold '))
-    save1.place(x=10, y=120)
+
+    save1 = tk.Button(master, text="Update Password", relief='groove',command=save_pass, 
+    fg="black", bg="#0ec772", height = 1,width=50, activebackground="white", font=('arial', 9, ' bold '))
+
+    save1.place(x=20, y=120)
     master.mainloop()
 
-#####################################################################################
+########################################## Password ##########################################
 
 def psw():
     assure_path_exists("TrainingImageLabel/")
@@ -129,20 +131,20 @@ def psw():
     else:
         mess._show(title='Wrong Password', message='You have entered wrong password')
 
-######################################################################################
+########################################## Clear Option ##########################################
 
 def clear():
     txt.delete(0, 'end')
-    res = "1)Take Images     2)Save Profile"
+    res = "Enter your details and Scan your images and then Submit!"
     message1.configure(text=res)
 
 
 def clear2():
     txt2.delete(0, 'end')
-    res = "1)Take Images     2)Save Profile"
+    res = "Enter your details and Scan your images and then Submit!"
     message1.configure(text=res)
 
-#######################################################################################
+########################################## Scan ##########################################
 
 def TakeImages():
     check_haarcascadefile()
@@ -180,7 +182,7 @@ def TakeImages():
                 # incrementing sample number
                 sampleNum = sampleNum + 1
                 # saving the captured face in the dataset folder TrainingImage
-                cv2.imwrite("TrainingImage\ " + name + "." + str(serial) + "." + Id + '.' + str(sampleNum) + ".jpg",
+                cv2.imwrite("TrainingImage\ " +"_"+ name + "." + str(serial) + "." + Id + '.' + str(sampleNum) + ".jpg",
                             gray[y:y + h, x:x + w])
                 # display the frame
                 cv2.imshow('Taking Images', img)
@@ -204,12 +206,14 @@ def TakeImages():
             res = "Enter Correct name"
             message.configure(text=res)
 
-########################################################################################
+########################################## ##########################################
 
 def TrainImages():
     check_haarcascadefile()
     assure_path_exists("TrainingImageLabel/")
+    
     recognizer = cv2.face_LBPHFaceRecognizer.create()
+
     harcascadePath = "haarcascade_frontalface_default.xml"
     detector = cv2.CascadeClassifier(harcascadePath)
     faces, ID = getImagesAndLabels("TrainingImage")
@@ -221,9 +225,9 @@ def TrainImages():
     recognizer.save("TrainingImageLabel\Trainner.yml")
     res = "Profile Saved Successfully"
     message1.configure(text=res)
-    message.configure(text='Total Registrations till now  : ' + str(ID[0]))
+    message.configure(text='Response(s)  : ' + str(ID[0]))
 
-############################################################################################3
+########################################## ##########################################
 
 def getImagesAndLabels(path):
     # get the path of all the files in the folder
@@ -245,7 +249,7 @@ def getImagesAndLabels(path):
         Ids.append(ID)
     return faces, Ids
 
-###########################################################################################
+####################################################################################
 
 def TrackImages():
     check_haarcascadefile()
@@ -256,7 +260,9 @@ def TrackImages():
     msg = ''
     i = 0
     j = 0
-    recognizer = cv2.face.LBPHFaceRecognizer_create()  # cv2.createLBPHFaceRecognizer()
+
+    recognizer = cv2.face.LBPHFaceRecognizer_create()   #cv2.createLBPHFaceRecognizer()
+
     exists3 = os.path.isfile("TrainingImageLabel\Trainner.yml")
     if exists3:
         recognizer.read("TrainingImageLabel\Trainner.yml")
@@ -264,7 +270,7 @@ def TrackImages():
         mess._show(title='Data Missing', message='Please click on Save Profile to reset data!!')
         return
     harcascadePath = "haarcascade_frontalface_default.xml"
-    faceCascade = cv2.CascadeClassifier(harcascadePath);
+    faceCascade = cv2.CascadeClassifier(harcascadePath)
 
     cam = cv2.VideoCapture(0)
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -273,7 +279,7 @@ def TrackImages():
     if exists1:
         df = pd.read_csv("StudentDetails\StudentDetails.csv")
     else:
-        mess._show(title='Details Missing', message='Students details are missing, please check!')
+        mess._show(title='Details Missing', message='Students details are missing, please check...')
         cam.release()
         cv2.destroyAllWindows()
         window.destroy()
@@ -329,16 +335,18 @@ def TrackImages():
     cam.release()
     cv2.destroyAllWindows()
 
-######################################## USED STUFFS ############################################
+########################################## Date ##########################################
     
 global key
 key = ''
 
 ts = time.time()
-date = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y')
+date = datetime.datetime.fromtimestamp(ts).strftime('Date: %d-%m-%Y')
 day,month,year=date.split("-")
 
-mont={'01':'January',
+mont={
+      
+      '01':'January',
       '02':'February',
       '03':'March',
       '04':'April',
@@ -352,62 +360,70 @@ mont={'01':'January',
       '12':'December'
       }
 
-######################################## GUI FRONT-END ###########################################
+########################################## GUI FRONT-END ##########################################
 
 window = tk.Tk()
-window.geometry("1280x720")
+window.geometry("1920x1080")
 window.resizable(True,False)
-window.title("Attendance System")
-window.configure(background='#2d420a')
+window.title("Attendfolio")
+window.configure(background='#0ACDDC') 
 
-frame1 = tk.Frame(window, bg="#c79cff")
+
+frame1 = tk.Frame(window, bg="#E6EFF6") #Make ur attendance
 frame1.place(relx=0.11, rely=0.17, relwidth=0.39, relheight=0.80)
 
-frame2 = tk.Frame(window, bg="#c79cff")
+frame2 = tk.Frame(window, bg="#E6EFF6") #Fill in your Details 
 frame2.place(relx=0.51, rely=0.17, relwidth=0.38, relheight=0.80)
 
-message3 = tk.Label(window, text="Face Recognition Based Attendance Monitoring System" ,fg="white",bg="#2d420a" ,width=55 ,height=1,font=('comic', 29, ' bold '))
-message3.place(x=10, y=10)
+message3 = tk.Label(window, text="TRACK ATTENDANCE USING FACE RECOGNITION" ,
+fg="White",bg="#0ACDDC" ,width=50 ,height=1,font=('Microsoft New Tai Lue', 30, ' bold '))
 
-frame3 = tk.Frame(window, bg="#c4c6ce")
+message3.place(x=40, y=10)
+
+frame3 = tk.Frame(window, bg="#E6EFF6")
 frame3.place(relx=0.52, rely=0.09, relwidth=0.09, relheight=0.07)
 
-frame4 = tk.Frame(window, bg="#c4c6ce")
+frame4 = tk.Frame(window, bg="#E6EFF6")
 frame4.place(relx=0.36, rely=0.09, relwidth=0.16, relheight=0.07)
 
-datef = tk.Label(frame4, text = day+"-"+mont[month]+"-"+year+"  |  ", fg="#ff61e5",bg="#2d420a" ,width=55 ,height=1,font=('comic', 22, ' bold '))
+datef = tk.Label(frame4, text = day+ "-" +mont[month]+ "-" +year+"   | " , 
+fg="#3d4141",bg="#0acddc" ,width=60 ,height=1,font=('candara', 15, ' bold '))
+
 datef.pack(fill='both',expand=1)
 
-clock = tk.Label(frame3,fg="#ff61e5",bg="#2d420a" ,width=55 ,height=1,font=('comic', 22, ' bold '))
+clock = tk.Label(frame3,fg="#3d4141",bg="#0acddc" ,width=120 ,height=1,font=('candara', 14, ' bold '))
 clock.pack(fill='both',expand=1)
 tick()
 
-head2 = tk.Label(frame2, text="                       For New Registrations                       ", fg="black",bg="#00fcca" ,font=('comic', 17, ' bold ') )
-head2.grid(row=0,column=0)
+head2 = tk.Label(frame2, text="Register", fg="black",bg="#e6eff6" ,font=('Arial', 17, ' bold ') )
+head2.place(x=200,y=20)
 
-head1 = tk.Label(frame1, text="                       For Already Registered                       ", fg="black",bg="#00fcca" ,font=('comic', 17, ' bold ') )
-head1.place(x=0,y=0)
+lbl = tk.Label(frame2, text="Enrollment ID*", width=12,bg="#E6EFF6" , fg="#828f8f",font=('Arial', 12, ' bold '))  
+lbl.place(x=20, y=65)
 
-lbl = tk.Label(frame2, text="Enter ID",width=20  ,height=1  ,fg="black"  ,bg="#c79cff" ,font=('comic', 17, ' bold ') )
-lbl.place(x=80, y=55)
-
-txt = tk.Entry(frame2,width=32 ,fg="black",font=('comic', 15, ' bold '))
+txt = tk.Entry(frame2,width=31 ,fg="black",font=('Arial', 15, ' normal '))  #The Text Box 1
 txt.place(x=30, y=88)
 
-lbl2 = tk.Label(frame2, text="Enter Name",width=20  ,fg="black"  ,bg="#c79cff" ,font=('comic', 17, ' bold '))
-lbl2.place(x=80, y=140)
+lbl2 = tk.Label(frame2, text="Full Name*",width=12, bg="#E6EFF6"  ,fg="#828f8f" ,font=('Arial', 12, ' bold '))
+lbl2.place(x=9, y=150)
 
-txt2 = tk.Entry(frame2,width=32 ,fg="black",font=('comic', 15, ' bold ')  )
+txt2 = tk.Entry(frame2,width=31 ,fg="black",font=('arial', 15, ' normal ')  ) #The Text Box 2
 txt2.place(x=30, y=173)
 
-message1 = tk.Label(frame2, text="1)Take Images  >>>  2)Save Profile" ,bg="#c79cff" ,fg="black"  ,width=39 ,height=1, activebackground = "#3ffc00" ,font=('comic', 15, ' bold '))
-message1.place(x=7, y=230)
+message1 = tk.Label(frame2, 
+text="Guide: Welcome! To Register for the Attendance.\nPlease Fill in your Details, Click on Scan & then Submit!" ,
+bg="#e6eff6" ,fg="#3d4141"  ,width=0 ,height=2,font=('Arial', 10, ' bold '))
 
-message = tk.Label(frame2, text="" ,bg="#c79cff" ,fg="black"  ,width=39,height=1, activebackground = "#3ffc00" ,font=('comic', 16, ' bold '))
-message.place(x=7, y=450)
+message1.place(x=45, y=230) 
 
-lbl3 = tk.Label(frame1, text="Attendance",width=20  ,fg="black"  ,bg="#c79cff"  ,height=1 ,font=('comic', 17, ' bold '))
-lbl3.place(x=100, y=115)
+
+message = tk.Label(frame2, text="" ,bg="#e6eff6" ,fg="#3d4141"  ,width=39,height=1,font=('Arial', 15, ' bold '))
+message.place(x=10, y=445) #Responses
+
+lbl3 = tk.Label(frame1, text="Attendfolio",width=20  ,fg="#00adba"  ,
+bg="#e6eff6"  ,height=1 ,font=('Microsoft New Tai Lue', 30, 'bold'))
+
+lbl3.place(x=5, y=80)
 
 res=0
 exists = os.path.isfile("StudentDetails\StudentDetails.csv")
@@ -420,18 +436,20 @@ if exists:
     csvFile1.close()
 else:
     res = 0
-message.configure(text='Total Registrations till now  : '+str(res))
+message.configure(text='Response(s) : '+str(res))
 
-##################### MENUBAR #################################
 
-menubar = tk.Menu(window,relief='ridge')
+########################################## MENUBAR ##########################################
+
+menubar = tk.Menu(window,relief='groove')
 filemenu = tk.Menu(menubar,tearoff=0)
-filemenu.add_command(label='Change Password', command = change_pass)
+menubar.add_cascade(label='Change Password', command = change_pass)
+menubar.add_cascade(label='Need Help?',font=('arial', 25, ' normal '), menu=filemenu)
 filemenu.add_command(label='Contact Us', command = contact)
 filemenu.add_command(label='Exit',command = window.destroy)
-menubar.add_cascade(label='Help',font=('comic', 29, ' bold '),menu=filemenu)
 
-################## TREEVIEW ATTENDANCE TABLE ####################
+
+########################################## TREEVIEW ATTENDANCE TABLE ##########################################
 
 tv= ttk.Treeview(frame1,height =13,columns = ('name','date','time'))
 tv.column('#0',width=82)
@@ -444,30 +462,28 @@ tv.heading('name',text ='NAME')
 tv.heading('date',text ='DATE')
 tv.heading('time',text ='TIME')
 
-###################### SCROLLBAR ################################
+########################################## SCROLLBAR ##########################################
 
 scroll=ttk.Scrollbar(frame1,orient='vertical',command=tv.yview)
 scroll.grid(row=2,column=4,padx=(0,100),pady=(150,0),sticky='ns')
 tv.configure(yscrollcommand=scroll.set)
 
-###################### BUTTONS ##################################
+########################################## BUTTONS ##########################################
 
-clearButton = tk.Button(frame2, text="Clear", command=clear  ,fg="black"  ,bg="#ff7221"  ,width=11 ,activebackground = "white" ,font=('comic', 11, ' bold '))
+clearButton=tk.Button(frame2,text="Clear",relief='groove',command=clear,fg="#3d4141",bg="#ECB42D",width=11,activebackground="yellow",font=('arial',12,'normal'))
 clearButton.place(x=335, y=86)
-clearButton2 = tk.Button(frame2, text="Clear", command=clear2  ,fg="black"  ,bg="#ff7221"  ,width=11 , activebackground = "white" ,font=('comic', 11, ' bold '))
+clearButton2=tk.Button(frame2,text="Clear",relief='groove',command=clear2 ,fg="#3d4141" ,bg="#ECB42D",width=11,activebackground="orange",font=('arial',12, 'normal'))
 clearButton2.place(x=335, y=172)    
-takeImg = tk.Button(frame2, text="Take Images", command=TakeImages  ,fg="white"  ,bg="#6d00fc"  ,width=34  ,height=1, activebackground = "white" ,font=('comic', 15, ' bold '))
-takeImg.place(x=30, y=300)
-trainImg = tk.Button(frame2, text="Save Profile", command=psw ,fg="white"  ,bg="#6d00fc"  ,width=34  ,height=1, activebackground = "white" ,font=('comic', 15, ' bold '))
-trainImg.place(x=30, y=380)
-trackImg = tk.Button(frame1, text="Take Attendance", command=TrackImages  ,fg="black"  ,bg="#3ffc00"  ,width=35  ,height=1, activebackground = "white" ,font=('comic', 15, ' bold '))
-trackImg.place(x=30,y=50)
-quitWindow = tk.Button(frame1, text="Quit", command=window.destroy  ,fg="black"  ,bg="#eb4600"  ,width=35 ,height=1, activebackground = "white" ,font=('comic', 15, ' bold '))
+takeImages=tk.Button(frame2,text="Scan",command=TakeImages,fg="white",bg="#50a5fc",width=34,height=1,activebackground="blue",font=('arial', 15, 'bold'))
+takeImages.place(x=30, y=300)
+trainImages=tk.Button(frame2,text="Submit",command=psw ,fg="white",bg="#0ec772",width=34,height=1,activebackground="green",font=('arial', 15, 'bold'))
+trainImages.place(x=30, y=370)
+trackImages=tk.Button(frame1,text="Take Attendance",command=TrackImages,fg="black",bg="#0ec772",width=35,height=1,activebackground="green",font=('comic',15,'bold'))
+trackImages.place(x=30,y=20)
+quitWindow=tk.Button(frame1,text="Quit",command=window.destroy,fg="black",bg="#ec2d51",width=35,height=1,activebackground="red",font=('arial',15,'bold'))
 quitWindow.place(x=30, y=450)
 
-##################### END ######################################
+########################################## END ##########################################
 
 window.configure(menu=menubar)
 window.mainloop()
-
-####################################################################################################
