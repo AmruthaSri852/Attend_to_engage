@@ -1,10 +1,10 @@
-########################################## Attendfolio #import#########################################
+########################################## Attendfolio ##########################################
 
 import tkinter as tk
 from tkinter import Tk, ttk
 from tkinter import messagebox as mess
 import tkinter.simpledialog as tsd
-import cv2, os
+import cv2, os 
 import csv
 import numpy as np
 from PIL import Image
@@ -472,7 +472,7 @@ tv.configure(yscrollcommand=scroll.set)
 
 clearButton=tk.Button(frame2,text="Clear",relief='groove',command=clear,fg="#3d4141",bg="#ECB42D",width=11,activebackground="yellow",font=('arial',12,'normal'))
 clearButton.place(x=335, y=86)
-clearButton2=tk.Button(frame2,text="Clear",relief='groove',command=clear2 ,fg="#3d4141" ,bg="#ECB42D",width=11,activebackground="orange",font=('arial',12, 'normal'))
+clearButton2=tk.Button(frame2,text="Clear",relief='groove',command=clear2 ,fg="#3d4141",bg="#ECB42D",width=11,activebackground="orange",font=('arial',12, 'normal'))
 clearButton2.place(x=335, y=172)    
 takeImages=tk.Button(frame2,text="Scan",command=TakeImages,fg="white",bg="#50a5fc",width=34,height=1,activebackground="blue",font=('arial', 15, 'bold'))
 takeImages.place(x=30, y=300)
